@@ -1,76 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Document</title>
-	</head>
-	<body>
 
-		<style>
-			.grid-container-acteurs{
-				display: grid;
-				grid-template-columns: 150px 200px;
-				grid-template-rows: 150px;
-				gap: 1px 1px;
-				grid-template-areas:
-					"img infos"
-			}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
 
-			.grid-container-films{
-				display: grid;
-				grid-template-columns: 200px 400px;
-				grid-template-rows: 400px;
-				gap: 1px 1px;
-				grid-template-areas: "img infos";
-			}
+<body>
+    <h1>oui</h1>
+    <p>test</p>
 
-			.tete { 
-				border-radius: 50%; 
-				height: 100px;
-				width: 100px;
+    <style>
+        .grid-container-acteurs {
+            display: grid;
+            grid-template-columns: 150px 200px;
+            grid-template-rows: 150px;
+            gap: 1px 1px;
+            grid-template-areas: "img infos"
+        }
+        
+        .grid-container-films {
+            display: grid;
+            grid-template-columns: 200px 400px;
+            grid-template-rows: 400px;
+            gap: 1px 1px;
+            grid-template-areas: "img infos";
+        }
+        
+        .tete {
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+        }
+        
+        .img {
+            grid-area: img;
+        }
+        
+        .infos {
+            grid-area: infos;
+        }
+        
+        .card-title {
+            font-size: 1.5em;
+        }
+        
+        .flag {
+            height: 1em;
+            width: 1em;
+            vertical-align: middle;
+        }
+        
+        .num {
+            background-color: yellow;
+            padding: 2px;
+            border-radius: 50%;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .btn1,
+        .btn2 {
+            cursor: pointer;
+            text-transform: uppercase;
+            background-color: yellow;
+            border: none;
+            color: black;
+            padding: 10px 24px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+    </style>
 
-			}
-
-			.img { grid-area: img; }
-			.infos { grid-area: infos; }
-
-			.card-title{
-				font-size: 1.5em;
-			}
-
-			.flag{
-				height: 1em;
-				width: 1em;
-				vertical-align: middle;
-			}
-
-			.num{
-				background-color: yellow;
-				padding: 2px;
-				border-radius: 50%;
-			}
-
-			ul {
-				list-style: none;
-				padding-left: 0;
-			}
-
-			.btn1, .btn2{
-				cursor: pointer;
-				text-transform: uppercase;
-				background-color: yellow; 
-				border: none;
-				color: black;
-				padding: 10px 24px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 16px;
-			}
-		</style>
-
-		<svg version="1.1" xlmns="http://www.w3.org/2000/svg">
+    <svg version="1.1" xlmns="http://www.w3.org/2000/svg">
 			<defs>
 			<symbol id="star" viewBox="0 0 300 275">
 			<polygon stroke-width="10"
@@ -88,23 +96,23 @@
 		</svg>
 
 
-		<div id="acteurs"></div>
-		<div id="films"></div>
+    <div id="acteurs"></div>
+    <div id="films"></div>
 
-		<script>
-			url='https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs.php'
-			fetch(url)
-				.then(response => response.json())
-				.then(function(data){
-					console.log(data);
-					console.log("liste");
-					for( let i=1; i<11; i++){
-						url='https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/'+i+'.jpg'
-						document.getElementById('acteurs').innerHTML += `
+    <script>
+        url = 'https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs.php'
+        fetch(url)
+            .then(response => response.json())
+            .then(function(data) {
+                console.log(data);
+                console.log("liste");
+                for (let i = 1; i < 11; i++) {
+                    url = 'https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/' + i + '.jpg'
+                    document.getElementById('acteurs').innerHTML += `
 								<div class="grid-container-acteurs">
-									<div class="img"><img class="tete" src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/`+i+`.jpg" alt="" srcset=""></div>
+									<div class="img"><img class="tete" src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/acteurs/` + i + `.jpg" alt="" srcset=""></div>
 									<div class="infos">
-										<div class="card-title">`+data[i-1].Nom+`</div>
+										<div class="card-title">` + data[i - 1].Nom + `</div>
 										<div><img class="flag"src="https://workshop.neotechweb.net/ws/flags/64/us.png" alt="" srcset=""> 8 octobre 1949</div>
 										<div><span class="num">58</span> films</div>
 										<svg> 
@@ -113,31 +121,32 @@
 									</div>
 								</div>
 						`;
-					}	
-				});
+                }
+            });
 
-			url='https://workshop.neotechweb.net/ws/ciamovie/1.0.0/films.php'
-			fetch(url)
-				.then(response => response.json())
-				.then(function(data){
-					console.log(data);
-					for(let i=0; i<9; i++){
-						document.getElementById('films').innerHTML += `
+        url = 'https://workshop.neotechweb.net/ws/ciamovie/1.0.0/films.php'
+        fetch(url)
+            .then(response => response.json())
+            .then(function(data) {
+                console.log(data);
+                for (let i = 0; i < 9; i++) {
+                    document.getElementById('films').innerHTML += `
 							<div class="grid-container-films">
-								<div class="img"><img class="affiche" src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/films/`+data[i].Fichier+`" alt="" srcset=""></div>
+								<div class="img"><img class="affiche" src="https://workshop.neotechweb.net/ws/ciamovie/1.0.0/films/` + data[i].Fichier + `" alt="" srcset=""></div>
 								<div class="infos">
-									<div class="card-title">`+data[i].Titre+`</div>
+									<div class="card-title">` + data[i].Titre + `</div>
 									<ul>
-										<li>`+data[i].Annee+`/ 1h45 / Comédie Française</li>
-										<li>De :  `+data[i].Realisateur+`</li>
+										<li>` + data[i].Annee + `/ 1h45 / Comédie Française</li>
+										<li>De :  ` + data[i].Realisateur + `</li>
 										<li>Avec Zach, Phoebe, Hoyt</li>
 									</ul>
 									<button class="btn1">Séances</button> <button class="btn2">Vod</button>
 								</div>
 							</div>
 						`;
-					}
-				})
-		</script>
-	</body>
+                }
+            })
+    </script>
+</body>
+
 </html>
